@@ -16,7 +16,7 @@ export default function Footer() {
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10">
               ✦
             </span>
-            Plex
+            Aura Studio
           </div>
 
           {/* Social icons */}
@@ -56,8 +56,8 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="mt-20 flex flex-col gap-6 border-t border-white/10 pt-6 text-sm text-white/50 md:flex-row md:items-center md:justify-between">
-          <span>© 2025 Plex</span>
-{/* 
+          <span>© 2026 Aura Studio</span>
+          {/* 
           <div className="flex gap-6">
             <span>Made by Framebase</span>
             <span>Built in Framer</span>

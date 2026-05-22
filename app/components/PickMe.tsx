@@ -20,8 +20,8 @@ export default function PickMe() {
 
           {/* Heading */}
           <h2 className="mt-8 text-center text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
-            <span className="text-red-600">Why Plex</span>{' '}
-            <span className="text-white/90">for Motion Designing</span>
+            <span className="text-red-600">Why Aura Studio</span>{' '}
+            <span className="text-white/90">for Design Works</span>
           </h2>
 
           {/* Subheading */}

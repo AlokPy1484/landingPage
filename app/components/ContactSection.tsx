@@ -3,7 +3,7 @@
 import ContactCard from "./ContactCard";
 import { Map } from "./Map";
 import { Radar, IconContainer } from "./ui/Radar";
-import { Globe, Server, Cpu, Wifi } from "lucide-react";
+import { CaseSensitive, FingerprintPattern, Cpu, MonitorCog, Frame } from "lucide-react";
 
 export default function ContactSection() {
 
@@ -21,10 +21,10 @@ export default function ContactSection() {
                         <Radar
                             className="bg-transparent border border-white/20 mx-auto h-full w-full"
                             icons={[
-                                { icon: Globe, radius: 0.75, angle: 145, delay: 0.2, label: "SEO Audit" },
-                                { icon: Server, radius: 1.0, angle: 105, delay: 0.6, label: "Lead Gen" },
-                                { icon: Cpu, radius: 0.5, angle: 75, delay: 1.0, label: "Performance" },
-                                { icon: Wifi, radius: 0.75, angle: 35, delay: 1.4, label: "Social Media" },
+                                { icon: Frame, radius: 0.75, angle: 145, delay: 0.2, label: "Logo Design" },
+                                { icon: CaseSensitive, radius: 1.0, angle: 105, delay: 0.6, label: "Typography" },
+                                { icon: MonitorCog, radius: 0.5, angle: 75, delay: 1.0, label: "Design System" },
+                                { icon: FingerprintPattern, radius: 0.75, angle: 35, delay: 1.4, label: "Brand Identity" },
                             ]}
                         >
                             <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none scale-90 md:scale-100 mb-4">

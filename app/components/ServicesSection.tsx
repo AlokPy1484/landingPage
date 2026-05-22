@@ -28,11 +28,11 @@ export default function ServicesSection() {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-[#290A0A] px-4 py-1 text-sm">
-              ⦿ Marketing Services
+              ⦿ Aura Studio
             </span>
 
             <h2 className="mt-6 text-4xl font-semibold sm:text-5xl">
-              <span className="text-red-500">Plex</span> Services
+              <span className="text-red-500">Aura</span> Services
             </h2>
 
             <p className="mt-4 text-white/70">
@@ -61,7 +61,7 @@ export default function ServicesSection() {
           <ServiceCard
             title="Provide multi tool support"
             description="Crafting distinctive, scalable, and impactful logos that embody your brand's identity."
-            component={<DockDemo/>}
+            component={<DockDemo />}
           />
 
           {/* Tall */}
@@ -75,8 +75,8 @@ export default function ServicesSection() {
           {/* Short */}
           <ServiceCard
             title="Helping your company reach your audiance"
-            description="Bringing ideas to life with interactive, user-centered Framer designs." 
-            component={<AnimatedBeamDemo/>}
+            description="Bringing ideas to life with interactive, user-centered Framer designs."
+            component={<AnimatedBeamDemo />}
 
           />
         </div>

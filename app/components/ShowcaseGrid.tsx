@@ -7,7 +7,7 @@ const videos = [
   {
     id: 1,
     title: 'Brand Showcase',
-    src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    src: 'https://www.pexels.com/video/5384977/',
     poster: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&fit=crop',
     aspect: '9/16'
   },
@@ -108,7 +108,7 @@ export default function ShowcaseGrid() {
 
           {/* Action */}
           <div className="absolute bottom-4 right-4 z-10">
-            <button 
+            <button
               onClick={(e) => toggleMute(e, videos[0].id)}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700 text-white transition hover:bg-red-600"
             >
@@ -153,7 +153,7 @@ export default function ShowcaseGrid() {
 
           {/* Action */}
           <div className="absolute bottom-4 right-4 z-10">
-            <button 
+            <button
               onClick={(e) => toggleMute(e, videos[1].id)}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700 text-white transition hover:bg-red-600"
             >
@@ -199,7 +199,7 @@ export default function ShowcaseGrid() {
 
           {/* Action */}
           <div className="absolute bottom-4 right-4 z-10">
-            <button 
+            <button
               onClick={(e) => toggleMute(e, videos[2].id)}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700 text-white transition hover:bg-red-600"
             >
@@ -242,7 +242,7 @@ export default function ShowcaseGrid() {
 
           {/* Action */}
           <div className="absolute bottom-4 right-4 z-10">
-            <button 
+            <button
               onClick={(e) => toggleMute(e, videos[3].id)}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700 text-white transition hover:bg-red-600"
             >

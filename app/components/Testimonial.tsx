@@ -83,32 +83,32 @@ const testimonials = [
   {
     quote:
       "Plex transformed our brand visuals completely. Engagement increased almost instantly after launch, and the motion work feels premium and intentional.",
-    name: "Aarav Mehta",
-    title: "Founder, Grow Rev",
+    name: "James Whitfield",
+    title: "Creative Director, Novastream Labs",
   },
   {
     quote:
       "The attention to detail and motion design quality was exceptional. Our product now feels polished, modern, and far more trustworthy.",
-    name: "Daniel Parker",
-    title: "CEO, Parker Cards",
+    name: "Priya Nandani",
+    title: "Head of Design, Orbitly",
   },
   {
     quote:
       "Working with Plex was seamless. The visuals perfectly matched our energy and helped us connect better with our fitness community.",
-    name: "Valeria Gomez",
-    title: "Founder, Valeria Fitness",
+    name: "Marcus Delacroix",
+    title: "Co-Founder, Peakform Studio",
   },
   {
     quote:
       "Plex understood our vision instantly. The final designs elevated our platform and made complex ideas feel simple and elegant.",
-    name: "Rohit Sharma",
-    title: "Product Lead, The Grids",
+    name: "Sofia Andersson",
+    title: "VP of Product, Luminary Tech",
   },
   {
     quote:
       "From concept to execution, everything felt strategic and refined. The motion design added real value to our brand experience.",
-    name: "Emily Chen",
-    title: "Marketing Director, Grow Rev",
+    name: "Leo Matsuda",
+    title: "Brand Strategist, Kindred Co.",
   },
 ];
 
