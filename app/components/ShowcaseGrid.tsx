@@ -1,34 +1,34 @@
 'use client';
 
-import { useState } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Play, Pause } from 'lucide-react';
 
 const videos = [
   {
     id: 1,
     title: 'Brand Showcase',
-    src: 'https://www.pexels.com/video/5384977/',
+    src: '/videos/Vertical.mp4',
     poster: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&fit=crop',
     aspect: '9/16'
   },
   {
     id: 2,
     title: 'Creative Process',
-    src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+    src: '/videos/Horizontal_a.mp4',
     poster: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1200&fit=crop',
     aspect: '16/9'
   },
   {
     id: 3,
     title: 'Innovation',
-    src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+    src: '/videos/Horizontal_b.mp4',
     poster: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=1200&fit=crop',
     aspect: '16/9'
   },
   {
     id: 4,
     title: 'Digital Solutions',
-    src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+    src: '/videos/Horizontal_c.mp4',
     poster: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&fit=crop',
     aspect: '16/9'
   }
@@ -36,26 +36,35 @@ const videos = [
 
 export default function ShowcaseGrid() {
   const [playingVideos, setPlayingVideos] = useState<Set<number>>(new Set());
-  const [mutedVideos, setMutedVideos] = useState<Set<number>>(new Set([1, 2, 3, 4]));
+  const videoRefs = useRef<Map<number, HTMLVideoElement>>(new Map());
 
-  const toggleMute = (e: React.MouseEvent, videoId: number) => {
+  const togglePlay = (e: React.MouseEvent, videoId: number) => {
     e.stopPropagation();
-    setMutedVideos(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(videoId)) {
+    const videoEl = videoRefs.current.get(videoId);
+    if (!videoEl) return;
+
+    if (playingVideos.has(videoId)) {
+      videoEl.pause();
+      setPlayingVideos(prev => {
+        const newSet = new Set(prev);
         newSet.delete(videoId);
-      } else {
-        newSet.add(videoId);
-      }
-      return newSet;
-    });
+        return newSet;
+      });
+    } else {
+      videoEl.play();
+      setPlayingVideos(prev => new Set(prev).add(videoId));
+    }
   };
 
   const handleMouseEnter = (videoId: number) => {
+    const videoEl = videoRefs.current.get(videoId);
+    if (videoEl) videoEl.play();
     setPlayingVideos(prev => new Set(prev).add(videoId));
   };
 
   const handleMouseLeave = (videoId: number) => {
+    const videoEl = videoRefs.current.get(videoId);
+    if (videoEl) videoEl.pause();
     setPlayingVideos(prev => {
       const newSet = new Set(prev);
       newSet.delete(videoId);
@@ -70,6 +79,15 @@ export default function ShowcaseGrid() {
       return newSet;
     });
   };
+
+  const setVideoRef = (el: HTMLVideoElement | null, videoId: number) => {
+    if (el) {
+      videoRefs.current.set(videoId, el);
+    } else {
+      videoRefs.current.delete(videoId);
+    }
+  };
+
   return (
     <section className="bg-black px-4 pb-8 md:pb-16">
       <div className="mx-auto max-w-7xl grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-3">
@@ -80,39 +98,31 @@ export default function ShowcaseGrid() {
           onMouseLeave={() => handleMouseLeave(videos[0].id)}>
           {/* Video */}
           <video
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+            className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${playingVideos.has(videos[0].id) ? 'grayscale-0' : 'grayscale'}`}
             poster={videos[0].poster}
-            muted={mutedVideos.has(videos[0].id)}
+            muted
             loop
             playsInline
             onEnded={() => handleVideoEnd(videos[0].id)}
-            ref={(el) => {
-              if (el) {
-                if (playingVideos.has(videos[0].id)) {
-                  el.play();
-                } else {
-                  el.pause();
-                }
-              }
-            }}
+            ref={(el) => setVideoRef(el, videos[0].id)}
           >
             <source src={videos[0].src} type="video/mp4" />
           </video>
 
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50 group-hover:bg-black/0 transition-all duration-500"></div>
+          <div className={`absolute inset-0 transition-all duration-500 ${playingVideos.has(videos[0].id) ? 'bg-black/0' : 'bg-black/50'}`}></div>
 
           {/* Title Overlay */}
           <div className="absolute bottom-4 left-4 right-4">
           </div>
 
-          {/* Action */}
+          {/* Play/Pause Action */}
           <div className="absolute bottom-4 right-4 z-10">
             <button
-              onClick={(e) => toggleMute(e, videos[0].id)}
+              onClick={(e) => togglePlay(e, videos[0].id)}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700 text-white transition hover:bg-red-600"
             >
-              {mutedVideos.has(videos[0].id) ? <VolumeX size={18} /> : <Volume2 size={18} />}
+              {playingVideos.has(videos[0].id) ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
             </button>
           </div>
         </div>
@@ -125,39 +135,31 @@ export default function ShowcaseGrid() {
           onMouseLeave={() => handleMouseLeave(videos[1].id)}>
           {/* Video */}
           <video
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+            className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${playingVideos.has(videos[1].id) ? 'grayscale-0' : 'grayscale'}`}
             poster={videos[1].poster}
-            muted={mutedVideos.has(videos[1].id)}
+            muted
             loop
             playsInline
             onEnded={() => handleVideoEnd(videos[1].id)}
-            ref={(el) => {
-              if (el) {
-                if (playingVideos.has(videos[1].id)) {
-                  el.play();
-                } else {
-                  el.pause();
-                }
-              }
-            }}
+            ref={(el) => setVideoRef(el, videos[1].id)}
           >
             <source src={videos[1].src} type="video/mp4" />
           </video>
 
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50 group-hover:bg-black/0 transition-all duration-500"></div>
+          <div className={`absolute inset-0 transition-all duration-500 ${playingVideos.has(videos[1].id) ? 'bg-black/0' : 'bg-black/50'}`}></div>
 
           {/* Title Overlay */}
           <div className="absolute bottom-4 left-4 right-4">
           </div>
 
-          {/* Action */}
+          {/* Play/Pause Action */}
           <div className="absolute bottom-4 right-4 z-10">
             <button
-              onClick={(e) => toggleMute(e, videos[1].id)}
+              onClick={(e) => togglePlay(e, videos[1].id)}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700 text-white transition hover:bg-red-600"
             >
-              {mutedVideos.has(videos[1].id) ? <VolumeX size={18} /> : <Volume2 size={18} />}
+              {playingVideos.has(videos[1].id) ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
             </button>
           </div>
         </div>
@@ -171,39 +173,31 @@ export default function ShowcaseGrid() {
           onMouseLeave={() => handleMouseLeave(videos[2].id)}>
           {/* Video */}
           <video
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+            className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${playingVideos.has(videos[2].id) ? 'grayscale-0' : 'grayscale'}`}
             poster={videos[2].poster}
-            muted={mutedVideos.has(videos[2].id)}
+            muted
             loop
             playsInline
             onEnded={() => handleVideoEnd(videos[2].id)}
-            ref={(el) => {
-              if (el) {
-                if (playingVideos.has(videos[2].id)) {
-                  el.play();
-                } else {
-                  el.pause();
-                }
-              }
-            }}
+            ref={(el) => setVideoRef(el, videos[2].id)}
           >
             <source src={videos[2].src} type="video/mp4" />
           </video>
 
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50 group-hover:bg-black/0 transition-all duration-500"></div>
+          <div className={`absolute inset-0 transition-all duration-500 ${playingVideos.has(videos[2].id) ? 'bg-black/0' : 'bg-black/50'}`}></div>
 
           {/* Title Overlay */}
           <div className="absolute bottom-3 left-3 right-3">
           </div>
 
-          {/* Action */}
+          {/* Play/Pause Action */}
           <div className="absolute bottom-4 right-4 z-10">
             <button
-              onClick={(e) => toggleMute(e, videos[2].id)}
+              onClick={(e) => togglePlay(e, videos[2].id)}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700 text-white transition hover:bg-red-600"
             >
-              {mutedVideos.has(videos[2].id) ? <VolumeX size={18} /> : <Volume2 size={18} />}
+              {playingVideos.has(videos[2].id) ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
             </button>
           </div>
         </div>
@@ -214,39 +208,31 @@ export default function ShowcaseGrid() {
           onMouseLeave={() => handleMouseLeave(videos[3].id)}>
           {/* Video */}
           <video
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+            className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-105 ${playingVideos.has(videos[3].id) ? 'grayscale-0' : 'grayscale'}`}
             poster={videos[3].poster}
-            muted={mutedVideos.has(videos[3].id)}
+            muted
             loop
             playsInline
             onEnded={() => handleVideoEnd(videos[3].id)}
-            ref={(el) => {
-              if (el) {
-                if (playingVideos.has(videos[3].id)) {
-                  el.play();
-                } else {
-                  el.pause();
-                }
-              }
-            }}
+            ref={(el) => setVideoRef(el, videos[3].id)}
           >
             <source src={videos[3].src} type="video/mp4" />
           </video>
 
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50 group-hover:bg-black/0 transition-all duration-500"></div>
+          <div className={`absolute inset-0 transition-all duration-500 ${playingVideos.has(videos[3].id) ? 'bg-black/0' : 'bg-black/50'}`}></div>
 
           {/* Title Overlay */}
           <div className="absolute bottom-3 left-3 right-3">
           </div>
 
-          {/* Action */}
+          {/* Play/Pause Action */}
           <div className="absolute bottom-4 right-4 z-10">
             <button
-              onClick={(e) => toggleMute(e, videos[3].id)}
+              onClick={(e) => togglePlay(e, videos[3].id)}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-red-700 text-white transition hover:bg-red-600"
             >
-              {mutedVideos.has(videos[3].id) ? <VolumeX size={18} /> : <Volume2 size={18} />}
+              {playingVideos.has(videos[3].id) ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
             </button>
           </div>
         </div>

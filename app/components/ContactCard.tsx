@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { Play, ArrowRight, Check, Video, Box, PlayCircle as PlayCircleIcon, MessageSquare, Smartphone, Activity, Timer, Film, Calendar, Wallet, Leaf, Rocket, Gem, ClipboardList, User, Mail, Send, Loader2, CheckCircle } from "lucide-react";
+import { Play, ArrowRight, Check, Palette, Megaphone, Target, Smartphone, Activity, Timer, Film, Calendar, Wallet, Leaf, Rocket, Gem, ClipboardList, User, Mail, Send, Loader2, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ContactCard() {
     const [step, setStep] = useState(1);
-    const [projectType, setProjectType] = useState("2d_animation");
+    const [projectType, setProjectType] = useState("logo_design");
     const [duration, setDuration] = useState(60);
     const [complexity, setComplexity] = useState("standard");
     const [timeline, setTimeline] = useState("oneweek");
@@ -31,9 +31,9 @@ export default function ContactCard() {
 
     const getProjectTypeLabel = (type: string) => {
         switch (type) {
-            case "2d_animation": return "2D Animation";
-            case "3d_motion": return "3D Motion";
-            case "explainer": return "Explainer Video";
+            case "logo_design": return "Logo Design";
+            case "social_media_ads": return "Social Media Ads";
+            case "marketing_campaign": return "Marketing Campaign";
             default: return "Selected Service";
         }
     };
@@ -189,25 +189,25 @@ export default function ContactCard() {
                 <div className="relative z-10 flex-1 overflow-y-auto px-6 py-4 custom-scrollbar">
                     {/* Page Heading */}
                     <div className="mb-6">
-                        <h1 className="text-xl font-bold text-white tracking-tight mb-2">Select Project Type</h1>
+                        <h1 className="text-xl font-bold text-white tracking-tight mb-2">Select Service Type</h1>
                         <p className="text-[#ba9c9c] text-xs leading-relaxed">
-                            Choose the style that best fits your vision to get started.
+                            Choose the service that best fits your project needs.
                         </p>
                     </div>
 
                     {/* Options List */}
                     <div className="flex flex-col gap-3 pb-4">
-                        {/* Option 1 */}
-                        <label className={`group relative flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${projectType === "2d_animation" ? "border-[#f20d0d] bg-[#f20d0d]/10" : "border-white/10 bg-black/20 hover:border-white/20 hover:bg-white/5"}`}>
-                            <input checked={projectType === "2d_animation"} onChange={() => setProjectType("2d_animation")} className="peer sr-only" name="project_type" type="radio" value="2d_animation" />
-                            <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${projectType === "2d_animation" ? "bg-[#f20d0d] text-white" : "bg-white/10 text-[#ba9c9c] group-hover:bg-[#f20d0d]/80 group-hover:text-white"}`}>
-                                <Video className="w-4 h-4" />
+                        {/* Option 1: Logo Design */}
+                        <label className={`group relative flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${projectType === "logo_design" ? "border-[#f20d0d] bg-[#f20d0d]/10" : "border-white/10 bg-black/20 hover:border-white/20 hover:bg-white/5"}`}>
+                            <input checked={projectType === "logo_design"} onChange={() => setProjectType("logo_design")} className="peer sr-only" name="project_type" type="radio" value="logo_design" />
+                            <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${projectType === "logo_design" ? "bg-[#f20d0d] text-white" : "bg-white/10 text-[#ba9c9c] group-hover:bg-[#f20d0d]/80 group-hover:text-white"}`}>
+                                <Palette className="w-4 h-4" />
                             </div>
                             <div className="flex flex-col text-left flex-1">
-                                <span className="text-sm font-bold text-white">2D Animation</span>
-                                <span className="text-[11px] text-[#ba9c9c] mt-0.5 leading-tight">Flat vector graphics and kinetic typography.</span>
+                                <span className="text-sm font-bold text-white">Logo Design</span>
+                                <span className="text-[11px] text-[#ba9c9c] mt-0.5 leading-tight">Custom brand identity and logo creation.</span>
                             </div>
-                            {projectType === "2d_animation" ? (
+                            {projectType === "logo_design" ? (
                                 <div className="h-4 w-4 shrink-0 rounded-full border-2 border-[#f20d0d] bg-[#f20d0d] flex items-center justify-center">
                                     <Check className="text-white w-3 h-3" strokeWidth={3} />
                                 </div>
@@ -216,17 +216,17 @@ export default function ContactCard() {
                             )}
                         </label>
 
-                        {/* Option 2 */}
-                        <label className={`group relative flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${projectType === "3d_motion" ? "border-[#f20d0d] bg-[#f20d0d]/10" : "border-white/10 bg-black/20 hover:border-white/20 hover:bg-white/5"}`}>
-                            <input checked={projectType === "3d_motion"} onChange={() => setProjectType("3d_motion")} className="peer sr-only" name="project_type" type="radio" value="3d_motion" />
-                            <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${projectType === "3d_motion" ? "bg-[#f20d0d] text-white" : "bg-white/10 text-[#ba9c9c] group-hover:bg-[#f20d0d]/80 group-hover:text-white"}`}>
-                                <Box className="w-4 h-4" />
+                        {/* Option 2: Social Media Ads */}
+                        <label className={`group relative flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${projectType === "social_media_ads" ? "border-[#f20d0d] bg-[#f20d0d]/10" : "border-white/10 bg-black/20 hover:border-white/20 hover:bg-white/5"}`}>
+                            <input checked={projectType === "social_media_ads"} onChange={() => setProjectType("social_media_ads")} className="peer sr-only" name="project_type" type="radio" value="social_media_ads" />
+                            <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${projectType === "social_media_ads" ? "bg-[#f20d0d] text-white" : "bg-white/10 text-[#ba9c9c] group-hover:bg-[#f20d0d]/80 group-hover:text-white"}`}>
+                                <Megaphone className="w-4 h-4" />
                             </div>
                             <div className="flex flex-col text-left flex-1">
-                                <span className="text-sm font-bold text-white">3D Motion</span>
-                                <span className="text-[11px] text-[#ba9c9c] mt-0.5 leading-tight">High-fidelity 3D rendering and product showcases.</span>
+                                <span className="text-sm font-bold text-white">Social Media Ads</span>
+                                <span className="text-[11px] text-[#ba9c9c] mt-0.5 leading-tight">Eye-catching ad creatives for all platforms.</span>
                             </div>
-                            {projectType === "3d_motion" ? (
+                            {projectType === "social_media_ads" ? (
                                 <div className="h-4 w-4 shrink-0 rounded-full border-2 border-[#f20d0d] bg-[#f20d0d] flex items-center justify-center">
                                     <Check className="text-white w-3 h-3" strokeWidth={3} />
                                 </div>
@@ -235,17 +235,17 @@ export default function ContactCard() {
                             )}
                         </label>
 
-                        {/* Option 3 */}
-                        <label className={`group relative flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${projectType === "explainer" ? "border-[#f20d0d] bg-[#f20d0d]/10" : "border-white/10 bg-black/20 hover:border-white/20 hover:bg-white/5"}`}>
-                            <input checked={projectType === "explainer"} onChange={() => setProjectType("explainer")} className="peer sr-only" name="project_type" type="radio" value="explainer" />
-                            <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${projectType === "explainer" ? "bg-[#f20d0d] text-white" : "bg-white/10 text-[#ba9c9c] group-hover:bg-[#f20d0d]/80 group-hover:text-white"}`}>
-                                <MessageSquare className="w-4 h-4" />
+                        {/* Option 3: Marketing Campaign */}
+                        <label className={`group relative flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${projectType === "marketing_campaign" ? "border-[#f20d0d] bg-[#f20d0d]/10" : "border-white/10 bg-black/20 hover:border-white/20 hover:bg-white/5"}`}>
+                            <input checked={projectType === "marketing_campaign"} onChange={() => setProjectType("marketing_campaign")} className="peer sr-only" name="project_type" type="radio" value="marketing_campaign" />
+                            <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${projectType === "marketing_campaign" ? "bg-[#f20d0d] text-white" : "bg-white/10 text-[#ba9c9c] group-hover:bg-[#f20d0d]/80 group-hover:text-white"}`}>
+                                <Target className="w-4 h-4" />
                             </div>
                             <div className="flex flex-col text-left flex-1">
-                                <span className="text-sm font-bold text-white">Explainer Video</span>
-                                <span className="text-[11px] text-[#ba9c9c] mt-0.5 leading-tight">Narrative videos explaining complex products.</span>
+                                <span className="text-sm font-bold text-white">Marketing Campaign</span>
+                                <span className="text-[11px] text-[#ba9c9c] mt-0.5 leading-tight">Full-scale marketing design and strategy assets.</span>
                             </div>
-                            {projectType === "explainer" ? (
+                            {projectType === "marketing_campaign" ? (
                                 <div className="h-4 w-4 shrink-0 rounded-full border-2 border-[#f20d0d] bg-[#f20d0d] flex items-center justify-center">
                                     <Check className="text-white w-3 h-3" strokeWidth={3} />
                                 </div>
