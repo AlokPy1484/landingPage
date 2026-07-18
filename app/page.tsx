@@ -11,7 +11,6 @@ import AnimatedNavbar from './components/AnimatedNavbar';
 export default function Home() {
   return (
     <div className="bg-black ">
-      {/* <Navbar/> */}
       <AnimatedNavbar />
       <HeroSection />
       <ShowcaseGrid />

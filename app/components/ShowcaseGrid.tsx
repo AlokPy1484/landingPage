@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { Play, Pause } from 'lucide-react';
+import { motion, useMotionTemplate, useMotionValueEvent, useScroll, useTransform } from "motion/react"
 
 const videos = [
   {
@@ -88,8 +89,27 @@ export default function ShowcaseGrid() {
     }
   };
 
+
+  const ref = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  })
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    console.log(latest)
+  })
+
+  const translateBlur = useTransform(scrollYProgress, [0, 0.3], [10, 0])
+
   return (
-    <section className="bg-black px-4 pb-8 md:pb-16">
+    <motion.section
+      ref={ref}
+      style={{ filter: useMotionTemplate`blur(${translateBlur}px)` }}
+
+
+      className="bg-black px-4 pb-8 md:pb-16">
       <div className="mx-auto max-w-7xl grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-3">
         <div
           className='
@@ -238,6 +258,6 @@ export default function ShowcaseGrid() {
         </div>
 
       </div>
-    </section>
+    </motion.section>
   );
 }
