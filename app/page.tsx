@@ -7,19 +7,21 @@ import ServicesSection from './components/ServicesSection';
 import ShowcaseGrid from './components/ShowcaseGrid';
 import Testimonial from './components/Testimonial';
 import ContactSection from './components/ContactSection';
+import AnimatedNavbar from './components/AnimatedNavbar';
 
 export default function Home() {
   return (
-   <div className="bg-black ">
-      <Navbar/>
-      <HeroSection/>
+    <div className="bg-black ">
+      {/* <Navbar/> */}
+      <AnimatedNavbar />
+      <HeroSection />
       <ShowcaseGrid />
-      <ServicesSection/>
-      <LogoLooper/>
-      <PickMe/>
-      <Testimonial/> 
-      <ContactSection/>
-      <Footer/>
-   </div>
+      <ServicesSection />
+      <LogoLooper />
+      <PickMe />
+      <Testimonial />
+      <ContactSection />
+      <Footer />
+    </div>
   );
 }
